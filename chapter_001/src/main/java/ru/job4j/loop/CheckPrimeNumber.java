@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.loop;
 
 public class CheckPrimeNumber {
     public boolean check(int num) {

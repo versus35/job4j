@@ -1,7 +1,5 @@
 package ru.job4j.condition;
-
 import java.util.Scanner;
-
 public class DummyBot {
     public static String answer(String question) {
         String rsl = "Это ставит меня в тупик. Задайте другой вопрос.";
@@ -25,3 +23,5 @@ public class DummyBot {
         System.out.println(answer(rsl3));
     }
 }
+
+
