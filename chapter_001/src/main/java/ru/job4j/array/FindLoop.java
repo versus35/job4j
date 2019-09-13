@@ -2,16 +2,25 @@ package ru.job4j.array;
 
 
 public class FindLoop {
-    public int indexOf(int[] data, int el) {
+    public static int indexOf(int[] data, int el) {
         int rst = -1;
-        int index = 0;
         for (int i = 0; i <data.length; i++) {
-            if (data[index] == el) {
-                rst = index;
+            if (data[i] == el) {
+                  rst = i;
                 break;
-            } else
-                return -1;
+            }
         }
+        return rst;
+    }
+
+    public static int indexOf(int[] data, int el, int start, int finish) {
+        int rst = -1;
+        for (int i = start; i <= finish; i++) {
+                if (data [i] == el){
+                    rst =i;
+                }
+            }
+
         return rst;
     }
 }

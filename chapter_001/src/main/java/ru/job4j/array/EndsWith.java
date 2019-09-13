@@ -4,20 +4,15 @@ import java.util.Arrays;
 
 public class EndsWith {
     public static boolean endsWith(char [] world, char [] post){
-        boolean result = false;
-        for (int i = 0; i < world.length; i++) {
-            for (int j = 0; j < post.length; j++){
-                if (world [i] == post [j]) {
-                    result = true;
-                } else if (world [i] != post [j]){
-                    result = false;
-                }
-
-
-
+        boolean result =  true;
+        for (int i = 0; i < post.length; i++){
+            if (world [world.length - 1 -i] != post [post.length -1 -i]){
+                result = false;
+                break;
             }
 
         }
-        return result;
+            return result;
     }
+
 }
