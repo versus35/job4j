@@ -7,15 +7,15 @@ public class SqMax {
 		if (first > second) {
 			if (first > third) {
 				if (first > forth) {
-					result = forth;
+					result = third;
 				}
 			}
 		} else if (second > third) {
 			if (second > forth) {
-				result = first;
+				result = third;
 			}
-		} else if (third > forth) {
-			result = second;
+		} else if (third < forth) {
+			result = third;
 		}
 		return result;
 	}
