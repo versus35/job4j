@@ -15,5 +15,7 @@ public class SqArea {
 		double result2 = square(6, 2);
 		System.out.println("p = 4, k = 1, real " + result1);
 		System.out.println("p = 6, k = 2, real " + result2);
+		System.out.println("p = 3, k = 2, real " + result2);
+		System.out.println("p = 4, k = 3, real " + result2);
 	}
 }

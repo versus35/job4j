@@ -16,6 +16,19 @@ public class SqAreaTest {
 		double s = 2;
 		double out = SqArea.square(4, 1);
 		Assert.assertEquals(s, out, 001);
+	}
 
+	@Test
+	public void squaresTo3Then2() {
+		double s = 2;
+		double out = SqArea.square(3, 2);
+		Assert.assertEquals(s, out, 001);
+	}
+
+	@Test
+	public void squaresTo4Then3() {
+		double s = 2;
+		double out = SqArea.square(4, 3);
+		Assert.assertEquals(s, out, 001);
 	}
 }
