@@ -19,11 +19,11 @@ public class ArrayTest {
 
 	@Test
 	public void mergeTo2() {
-		int[] a = new int[]{10, 20, 30, 40};
-		int[] b = new int[]{5, 6, 7, 8};
-		int[] input = new int[]{10, 20, 30, 40, 5, 6, 7, 8};
+		int[] a = new int[]{5, 6, 7, 8};
+		int[] b = new int[]{10, 20, 30, 40};
+		int[] input = new int[]{5, 6, 7, 8, 10, 20, 30, 40};
 		int[] result = Array.merge(a, b, input);
-		int[] expected = {10, 20, 30, 40, 5, 6, 7, 8};
+		int[] expected = {5, 6, 7, 8, 10, 20, 30, 40};
 		Assert.assertThat(result, is(expected));
 	}
 }
