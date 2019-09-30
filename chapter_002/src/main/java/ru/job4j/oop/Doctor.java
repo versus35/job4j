@@ -9,6 +9,6 @@ public class Doctor extends Profession {
 		this.qualification = qualification;
 		this.experience = experience;
 	}
-	
+
 }
 
