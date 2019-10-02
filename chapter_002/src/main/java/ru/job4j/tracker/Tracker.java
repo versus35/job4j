@@ -1,12 +1,9 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.Arrays;
 
 public class Tracker {
-	private final List<Item> items = new ArrayList<>(100);
+	private final Item[] items = new Item[100];
 	private int position = 0;
 
 	private String generateId() {
@@ -18,17 +15,18 @@ public class Tracker {
 
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		this.items.add(this.position++, item);
+		this.items[this.position++] = item;
 		return item;
 	}
 
 	public boolean replace(Item item, String id) {
 		boolean result = false;
 		for (int i = 0; i < position; i++) {
-			if (items.get(i).getId().equals(id)) {
+			if (items[i] != null && items[i].getId().equals(id)) {
 				item.setId(id);
-				items.set(i, item);
+				items[i] = item;
 				result = true;
+				break;
 			}
 		}
 		return result;
@@ -37,8 +35,8 @@ public class Tracker {
 	public boolean delete(String id) {
 		boolean result = false;
 		for (int i = 0; i < position; i++) {
-			if (items.get(i).getId().equals(id)) {
-				items.remove(i);
+			if (items[i] != null && items[i].getId().equals(id)) {
+				System.arraycopy(this.items, i + 1, items, i, this.position - i);
 				position--;
 				result = true;
 				break;
@@ -49,25 +47,29 @@ public class Tracker {
 		return result;
 	}
 
-	public List<Item> findAll() {
-		return items;
+	public Item[] findAll() {
+		return Arrays.copyOf(this.items, this.position);
 	}
 
-	public List<Item> findByName(String key) {
-		ArrayList<Item> result = new ArrayList<>(position);
-		for (int i = 0; i < position; i++) {
-			if (key.equals(this.items.get(i).getName())) {
-				result.add(items.get(i));
+	public Item[] findByName(String key) {
+		Item[] result = new Item[0];
+		if (items != null) {
+			int temp = 0;
+			for (int i = 0; i < position; i++) {
+				if (this.items[i].getName().equals(key)) {
+					result = Arrays.copyOf(result, temp + 1);
+					result[temp] = this.items[i];
+				}
 			}
 		}
 		return result;
 	}
 
 	public Item findById(String id) {
-		Item result = new Item();
-		for (Item item : items) {
-			if (id.equals(item.getId())) {
-				result = item;
+		Item result = null;
+		for (int i = 0; i < position; i++) {
+			if (items[i] != null && items[i].getId().equals(id)) {
+				result = items[i];
 				break;
 			}
 		}

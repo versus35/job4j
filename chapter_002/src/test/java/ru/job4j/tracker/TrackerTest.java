@@ -55,25 +55,26 @@ public class TrackerTest {
 		tracker.add(item);
 		tracker.add(item1);
 		tracker.add(item2);
-		List<Item> items = Arrays.asList(item, item1, item2);
-		assertThat(tracker.findAll(), is(items));
+		assertThat(tracker.findAll(), is(new Item[]{item, item1, item2}));
 	}
 
 	@Test
 	public void whenFindByName() {
 		Tracker tracker = new Tracker();
 		Item item = new Item("test7", "test7");
+		Item item1 = new Item("test8", "test8");
 		tracker.add(item);
-		List<Item> items = Arrays.asList(item);
-		assertThat(tracker.findByName(item.getName()), is(items));
+		tracker.add(item1);
+		assertThat(tracker.findByName("test8"), is(new Item[]{item1}));
 
 	}
+
 	@Test
 	public void whenFindId() {
 		Tracker tracker = new Tracker();
 		Item item = new Item("test8", "test8");
 		tracker.add(item);
-		assertThat(tracker.findById(item.getId()), is (item));
+		assertThat(tracker.findById(item.getId()), is(item));
 	}
 
 }
