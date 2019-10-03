@@ -27,7 +27,6 @@ public class StartUI {
 				System.out.println("=== Редактирование заявки ===");
 				System.out.println("=== Введите ID заявки ===");
 				String id = scanner.nextLine();
-				Item item = tracker.findById(id);
 				System.out.println("=== Введите имя ===");
 				String name = scanner.nextLine();
 				Item item1 = new Item(name);
@@ -51,7 +50,9 @@ public class StartUI {
 				if (item != null) {
 					System.out.println("Заявка " + item.getId());
 					System.out.println("Имя " + item.getName());
-				}
+				}else if (tracker.findById(id) == null){
+					 System.out.println("Заявка " + id + " не найдена");
+				 }
 			} else if (select == 5) {
 				System.out.println("=== Поиск заявки по имени ===");
 				System.out.println("Введите имя");
