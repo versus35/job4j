@@ -35,7 +35,7 @@ public class StartUI {
 		String name = input.askStr("");
 		Item item = new Item(name);
 		tracker.add(item);
-		System.out.println("Новая заявка " + item.getId() + "добавлена");
+		System.out.println("Новая заявка " + item.getId() + " добавлена");
 	}
 	public static void findAllItem(Input input, Tracker tracker) {
 		System.out.println("=== Список всех заявок ===");
@@ -63,7 +63,7 @@ public class StartUI {
 		System.out.println("Введите ID заявки");
 		String id = input.askStr("");
 		if (tracker.delete(id)) {
-			System.out.println("Заявка " + id + "удалена");
+			System.out.println("Заявка " + id + " удалена");
 		}
 	}
 	public static void findIdItem(Input input, Tracker tracker) {
