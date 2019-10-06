@@ -7,14 +7,14 @@ public class Matches {
 	public static void main(String[] args) {
 		int matches = 11;
 		String user2 = "Ivan";
-		String user1 = "Petya";
+		String user1 = "Vela";
 		Scanner io = new Scanner(System.in);
 		System.out.println("==Игра начинается==");
 		System.out.println("==На столе 11 спичек==");
 		System.out.println("введите число от 1 до 3: ");
 		while (true) {
 			int user = Integer.parseInt(String.valueOf(io.nextInt()));
-			System.out.println(user1 + " Взял " + user);
+			System.out.println(user1 + " Взяла " + user);
 			for (int i = 0; i < user; i++) {
 				matches--;
 				System.out.println("На столе осталось " + matches + " спичек");

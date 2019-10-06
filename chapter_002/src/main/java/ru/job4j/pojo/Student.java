@@ -2,7 +2,7 @@ package ru.job4j.pojo;
 
 public class Student {
 	private String firstName;
-	private  String lastName;
+	private String lastName;
 	private String group;
 	private String dateOfReceipt;
 

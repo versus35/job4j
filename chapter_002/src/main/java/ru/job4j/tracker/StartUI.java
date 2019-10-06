@@ -10,7 +10,7 @@ public class StartUI {
 			System.out.println("Выбор меню :");
 			int select = Integer.parseInt(scanner.nextLine());
 			if (select == 0) {
-				System.out.println("==== Добавление новой заявки====");
+				System.out.println("==== Добавление новой заявки ====");
 				System.out.println("Введите имя: ");
 				String name = scanner.nextLine();
 				Item item = new Item(name);
@@ -50,15 +50,15 @@ public class StartUI {
 				if (item != null) {
 					System.out.println("Заявка " + item.getId());
 					System.out.println("Имя " + item.getName());
-				}else if (tracker.findById(id) == null){
-					 System.out.println("Заявка " + id + " не найдена");
-				 }
+				} else if (tracker.findById(id) == null) {
+					System.out.println("Заявка " + id + " не найдена");
+				}
 			} else if (select == 5) {
 				System.out.println("=== Поиск заявки по имени ===");
 				System.out.println("Введите имя");
 				String name = scanner.nextLine();
 				Item[] item = tracker.findByName(name);
-				for (int i = 0; i < item.length; i++){
+				for (int i = 0; i < item.length; i++) {
 					System.out.println("Заявка " + item[i].getId());
 					System.out.println("Имя " + item[i].getName());
 				}

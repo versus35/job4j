@@ -24,7 +24,7 @@ public class Library {
 			System.out.println(i.getName() + " - " + i.getNumberOfPages());
 		}
 		System.out.println();
-		if (book[3] == fifth){
+		if (book[3] == fifth) {
 			System.out.println(fifth.getName());
 		}
 	}

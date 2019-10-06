@@ -9,10 +9,10 @@ import static org.junit.Assert.assertThat;
 public class ArrayTest {
 	@Test
 	public void mergeTo1() {
-		int[] A = new int[]{1, 2, 3, 4};
-		int[] B = new int[]{5, 6, 7, 8};
+		int[] a = new int[]{1, 2, 3, 4};
+		int[] b = new int[]{5, 6, 7, 8};
 		int[] input = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
-		int[] result = Array.merge(A, B, input);
+		int[] result = Array.merge(a, b, input);
 		int[] expected = {1, 2, 3, 4, 5, 6, 7, 8};
 		Assert.assertThat(result, is(expected));
 	}
