@@ -3,18 +3,25 @@ package ru.job4j.tracker;
 public class Item {
 	private String id;
 	private String name;
+	private String decs;
+	private long time;
+	private String test_name;
+	private String test;
 
-	public Item(String id, String name) {
+	public Item(String id, String name, String decs, long time) {
 		this.id = id;
 		this.name = name;
-	}
-
-	public Item() {
-
+		this.decs = decs;
+		this.time = time;
 	}
 
 	public Item(String name) {
 		this.name = name;
+	}
+
+	public Item(String test_name, String test) {
+		this.test_name = test_name;
+		this.test = test;
 	}
 
 	public String getId() {
@@ -32,4 +39,21 @@ public class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getDesc() {
+		return decs;
+	}
+
+	public void setDecs(String decs) {
+		this.decs = decs;
+	}
+
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+	}
+
 }
