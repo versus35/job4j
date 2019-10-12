@@ -4,42 +4,44 @@ package ru.job4j.tracker;
 public class StartUI {
 
 	public void init(Input input, Tracker tracker, UserAction[] actions) {
-		boolean run = false;
-//		while (true) {
-//			this.showMenu(actions);
-////			System.out.println("Выбор меню :");
-//			int select = Integer.parseInt(input.askStr(""));
-//			if (select == 0) {
-//				StartUI.createItem(input, tracker);
-//			} else if (select == 1) {
-//				StartUI.findAllItem(input, tracker);
-//			} else if (select == 2) {
-//				StartUI.replaceItem(input, tracker);
-//			} else if (select == 3) {
-//				StartUI.deleteItem(input, tracker);
-//			} else if (select == 4) {
-//				StartUI.findIdItem(input, tracker);
-//			} else if (select == 5) {
-//				StartUI.findNameItem(input, tracker);
-//			} else if (select == 6) {
-//				System.out.println("=== Выход из программы ===");
-//				break;
-//			}
-//		}
-		while (run) {
+		boolean run = true;
+		while (true) {
 			this.showMenu(actions);
-			int select = input.askInt("Select: ");
-			UserAction action = actions[select];
-			run = action.execute(input, tracker);
+//			System.out.println("Выбор меню :");
+			int select = Integer.parseInt(input.askStr(""));
+			if (select == 0) {
+				StartUI.createItem(input, tracker);
+			} else if (select == 1) {
+				StartUI.findAllItem(input, tracker);
+			} else if (select == 2) {
+				StartUI.replaceItem(input, tracker);
+			} else if (select == 3) {
+				StartUI.deleteItem(input, tracker);
+			} else if (select == 4) {
+				StartUI.findIdItem(input, tracker);
+			} else if (select == 5) {
+				StartUI.findNameItem(input, tracker);
+			} else if (select == 6) {
+				System.out.println("=== Выход из программы ===");
+				break;
+			}
 		}
+//		while (!run) {
+//			this.showMenu(actions);
+//			int select = input.askInt("Test");
+//			UserAction action = actions[select];
+//			run = action.execute(input, tracker);
+//		}
+//boolean run = true;
+    while (run) {
+		this.showMenu(actions);
+		int select = input.askInt("Select: ", 6);
+		UserAction action = actions[select];
+		run = action.execute(input, tracker);
+	}
 	}
 
-	private void showMenu(UserAction[] actions) {
-		System.out.println("Menu.");
-		for (int index = 0; index < actions.length; index++) {
-			System.out.println(index + ". " + actions[index].name());
-		}
-	}
+
 
 
 	public static void createItem(Input input, Tracker tracker) {
@@ -106,23 +108,27 @@ public class StartUI {
 			System.out.println("Имя " + item[i].getName());
 		}
 	}
+	private void showMenu(UserAction[] actions) {
+		System.out.println("Menu.");
+		System.out.println("Добавление новой заявки: 0");
+		System.out.println("Показать все заявки: 1");
+		System.out.println("Редактирование заявок: 2");
+		System.out.println("Удаление заявки: 3");
+		System.out.println("Поиск заявки по id: 4");
+		System.out.println("Поиск заявки по имени: 5");
+		System.out.println("Выход из программы: 6");
+		for (int index = 0; index < actions.length; index++) {
+			System.out.println(index + ". " + actions[index].name());
+		}
+	}
 
-
-//	private void showMenu() {
-//		System.out.println("Добавление новой заявки: 0");
-//		System.out.println("Показать все заявки: 1");
-//		System.out.println("Редактирование заявок: 2");
-//		System.out.println("Удаление заявки: 3");
-//		System.out.println("Поиск заявки по id: 4");
-//		System.out.println("Поиск заявки по имени: 5");
-//		System.out.println("Выход из программы: 6");
-//	}
 
 	public static void main(String[] args) {
-		Input input = new ConsoleInput();
+		Input validate = new ValidateInput();
 		Tracker tracker = new Tracker();
-		UserAction[] actions = {new CreateAction(), new ReplaceItem(), new DeleteItem()};
-		new StartUI().init(input, tracker, actions);
+		UserAction[] actions = {
+				new CreateAction()
+		};
+		new StartUI().init(validate, tracker, actions);
 	}
-	
 }

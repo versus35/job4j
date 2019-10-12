@@ -3,14 +3,38 @@ package ru.job4j.tracker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.swing.*;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.math.BigInteger;
 import java.util.StringJoiner;
 
 
 public class StartUITest {
+	private final PrintStream stdout = System.out;
+	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	private final String menu = "0. Add new Item." + System.lineSeparator()
+			+ "1. Edit Item." + System.lineSeparator()
+			+ "2. Show all items." + System.lineSeparator()
+			+ "3. Delete item." + System.lineSeparator()
+			+ "4. Find item by ID." + System.lineSeparator()
+			+ "5. Find item by Name." + System.lineSeparator()
+			+ "6. Exit program." + System.lineSeparator();
+
+	@Before
+	public void loadOutput() {
+		System.out.println("execute before method");
+		System.setOut(new PrintStream(out));
+	}
+	@After
+	public void backOutput() {
+		System.setOut(stdout);
+		System.out.println("execute after method");
+	}
 	@Test
 	public void whenExit() {
 		StubInput input = new StubInput(
@@ -59,9 +83,6 @@ public class StartUITest {
 		}
 	@Test
 	public void whenPrtMenu() {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		PrintStream def = System.out;
-		System.setOut(new PrintStream(out));
 		StubInput input = new StubInput(
 				new String[] {"0"}
 		);
@@ -70,9 +91,10 @@ public class StartUITest {
 		String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
 				.add("Menu.")
 				.add("0. Stub action")
+				.add("1. All Items")
 				.toString();
 		assertThat(new String(out.toByteArray()), is(expect));
-		System.setOut(def);
+		System.setOut(stdout);
 	}
 
 }
