@@ -18,7 +18,7 @@ public class FindByNameActionTest {
 		Tracker tracker = new Tracker();
 		Item item = new Item("Find Name");
 		tracker.add(item);
-		FindByNameAction act = new FindByNameAction();
+		FindByNameAction act = new FindByNameAction(4, "Поиск завки по имени");
 		act.execute(new StubInput(new String[]{}), tracker);
 		String expect = new StringJoiner(System.lineSeparator())
 				.add(item.getName())

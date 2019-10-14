@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
-public class ReplaceItem implements UserAction {
+public class ReplaceItem extends BaseAction {
+
+
+	protected ReplaceItem(int key, String name) {
+		super(key, name);
+	}
+
 	@Override
 	public String name() {
 		return "=== Редактирование заявки ===";

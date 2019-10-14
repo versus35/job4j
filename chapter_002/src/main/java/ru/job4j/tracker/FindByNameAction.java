@@ -1,6 +1,11 @@
 package ru.job4j.tracker;
 
-public class FindByNameAction implements UserAction {
+public class FindByNameAction extends BaseAction {
+
+	protected FindByNameAction(int key, String name) {
+		super(key, name);
+	}
+
 	@Override
 	public String name() {
 		return "=== Поиск заявки по имени ===";

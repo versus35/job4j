@@ -23,14 +23,14 @@ public class StartUI {
 		Input input = new ConsoleInput();
 		Input validate = new ValidateInput(input);
 		Tracker tracker = new Tracker();
-		UserAction[] actions = {
-				new CreateAction(),
-				new ReplaceItem(),
-				new DeleteItem(),
-				new FindAllAction(),
-				new FindByNameAction(),
-				new FindByIdAction(),
-				new WhenExist()
+		BaseAction[] actions =   {
+				new CreateAction(0, "Добавление новой заявки"),
+				new ReplaceItem(1, "Редактирование заявки"),
+				new DeleteItem(2, "Удаление заявки"),
+				new FindAllAction(3, "Поиск всех заявок"),
+				new FindByNameAction(4, "Поиск заявки по имени"),
+				new FindByIdAction(5, "Поиск заявки по ID"),
+				new Exit(6, "Выход из программы")
 		};
 		new StartUI().init(validate, tracker, actions);
 	}

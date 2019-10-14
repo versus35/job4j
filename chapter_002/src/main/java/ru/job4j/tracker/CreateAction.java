@@ -1,6 +1,13 @@
 package ru.job4j.tracker;
 
-public class CreateAction implements UserAction {
+public class CreateAction extends BaseAction {
+
+
+	protected CreateAction(int key, String name) {
+		super(key, name);
+	}
+
+
 	@Override
 	public String name() {
 		return "=== Добавление новой заявки ===";

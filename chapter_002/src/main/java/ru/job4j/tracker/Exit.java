@@ -1,7 +1,12 @@
 package ru.job4j.tracker;
 
 
-public class WhenExist implements UserAction {
+public class Exit extends BaseAction {
+
+	protected Exit(int key, String name) {
+		super(key, name);
+	}
+
 	@Override
 	public String name() {
 		return "=== Выход из программы ===";

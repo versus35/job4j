@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
-public class FindByIdAction implements UserAction {
+public class FindByIdAction extends BaseAction {
+
+
+	protected FindByIdAction(int key, String name) {
+		super(key, name);
+	}
+
 	@Override
 	public String name() {
 		return "=== Поиск заявки по ID ===";
