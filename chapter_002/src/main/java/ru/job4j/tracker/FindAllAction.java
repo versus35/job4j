@@ -8,9 +8,7 @@ public class FindAllAction implements UserAction {
 
 	@Override
 	public boolean execute(Input input, Tracker tracker) {
-//		for (Item item : tracker.findAll()) {
-//			System.out.println(String.format("%s %s", item.getId(), item.getName()));
-//		}
+		System.out.println("-- Поиск всех заявок --");
 		Item[] allItems = tracker.findAll();
 		for (int i = 0; i < allItems.length; i++) {
 			System.out.println("Заявка: " + allItems[i].getId());

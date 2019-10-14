@@ -8,9 +8,10 @@ public class ReplaceItem implements UserAction {
 
 	@Override
 	public boolean execute(Input input, Tracker tracker) {
-		System.out.println("=== Введите ID заявки ===");
+		System.out.println("-- Редактирование заявки --");
+		System.out.println("Введите ID заявки: ");
 		String id = input.askStr("");
-		System.out.println("=== Введите имя ===");
+		System.out.println("Введите имя: ");
 		String name = input.askStr("");
 		Item item1 = new Item(name);
 		if (tracker.replace(item1, id)) {

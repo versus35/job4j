@@ -8,6 +8,7 @@ public class CreateAction implements UserAction {
 
 	@Override
 	public boolean execute(Input input, Tracker tracker) {
+		System.out.println("-- Добавление новой заявки --");
 		System.out.println("Введите имя: ");
 		String name = input.askStr(" ");
 		Item item = new Item(name);

@@ -8,10 +8,8 @@ public class FindByIdAction implements UserAction {
 
 	@Override
 	public boolean execute(Input input, Tracker tracker) {
-//		for (Item item : tracker.findByName(name())) {
-//			System.out.println(String.format("%s %s", item.getId(), item.getName()));
-//		}
-		System.out.println("Введите ID заявки");
+		System.out.println("-- Поиск заявки по ID --");
+		System.out.println("Введите ID заявки: ");
 		String id = input.askStr("");
 		Item item = tracker.findById(id);
 		if (item != null) {
