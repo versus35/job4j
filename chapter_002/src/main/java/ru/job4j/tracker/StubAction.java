@@ -9,11 +9,6 @@ public class StubAction implements UserAction {
 	}
 
 	@Override
-	public String info() {
-		return String.format("%s. %s", this.key(), "add new item.");
-	}
-
-	@Override
 	public String name() {
 		return "Stub Action";
 	}

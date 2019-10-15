@@ -13,11 +13,4 @@ public abstract class BaseAction implements UserAction {
 	public int key() {
 		return this.key;
 	}
-
-	@Override
-	public String info() {
-		return String.format("%s : %s", this.key, this.name);
-	}
-
-
 }
