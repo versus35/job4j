@@ -55,14 +55,11 @@ public class Tracker {
 		Item[] result = new Item[0];
 		int temp = 0;
 		if (items != null) {
-		for (int i = 0; i < position; i++) {
-			if (items[i].getName().equals(key)) {
-				result = Arrays.copyOf(result, temp + 1);
-				result[temp++] = this.items[i];
-
-
-			}
-
+			for (int i = 0; i < position; i++) {
+				if (items[i].getName().equals(key)) {
+					result = Arrays.copyOf(result, temp + 1);
+					result[temp++] = this.items[i];
+				}
 			}
 		}
 		return result;
