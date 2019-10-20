@@ -9,9 +9,9 @@ public class PriorityQueue {
 	public void put(Task task) {
 		int count = 0;//tasks.size();
 			for (Task i : tasks) {
-				if (task.getPriority() > i.getPriority()) {
-					count ++;
-					break;
+				if (task.getPriority() >= i.getPriority()) {
+					count++;
+					//break;
 				}
 			}
 		tasks.add(count, task);
