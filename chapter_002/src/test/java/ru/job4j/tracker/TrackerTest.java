@@ -49,13 +49,14 @@ public class TrackerTest {
 	@Test
 	public void whenFindAll() {
 		Tracker tracker = new Tracker();
-		Item item = new Item("test4", "test4");
-		Item item1 = new Item("test5", "test5");
-		Item item2 = new Item("test6", "test6");
-		tracker.add(item);
-		tracker.add(item1);
-		tracker.add(item2);
-		assertThat(tracker.findAll(), is(new Item[]{item, item1, item2}));
+		Item previous = new Item("test1", "testDescription");
+		Item next = new Item("test2", "testDescription");
+		tracker.add(previous);
+		tracker.add(next);
+		List<Item> list = new ArrayList<>();
+		list.add(previous);
+		list.add(next);
+		assertThat(tracker.findAll(), is(list));
 	}
 
 	@Test
@@ -65,8 +66,10 @@ public class TrackerTest {
 		Item item1 = new Item("test8", "test8");
 		tracker.add(item);
 		tracker.add(item1);
-		assertThat(tracker.findByName("test8"), is(new Item[]{item1}));
-
+		List<Item> list = new ArrayList<>();
+		list.add(item);
+		list.add(item1);
+		assertThat(tracker.findByName("test8"), is(list));
 	}
 
 	@Test
