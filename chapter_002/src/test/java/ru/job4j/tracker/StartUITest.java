@@ -1,95 +1,167 @@
 package ru.job4j.tracker;
 
+
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import javax.swing.*;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.math.BigInteger;
-import java.util.StringJoiner;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+	private static final Object MENU = StartUITest.menu();
+	private Tracker tracker = new Tracker();
 	private final PrintStream stdout = System.out;
 	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-	private final String menu = "0. Add new Item." + System.lineSeparator()
-			+ "1. Edit Item." + System.lineSeparator()
-			+ "2. Show all items." + System.lineSeparator()
-			+ "3. Delete item." + System.lineSeparator()
-			+ "4. Find item by ID." + System.lineSeparator()
-			+ "5. Find item by Name." + System.lineSeparator()
-			+ "6. Exit program." + System.lineSeparator();
 
-	@Before
-	public void loadOutput() {
-		System.out.println("execute before method");
-		System.setOut(new PrintStream(out));
-	}
+	private String ln = System.lineSeparator();
+	private final Consumer<String> output = new Consumer<>() {
+		private PrintStream ps = new PrintStream(out);
+		@Override
+		public void accept(String s) {
+			ps.println(s);
+		}
+		@Override
+		public String toString() {
+			return out.toString();
+		}
+	};
 	@After
-	public void backOutput() {
-		System.setOut(stdout);
-		System.out.println("execute after method");
+	public void backOutputAfter() {
+		output.accept("execute after method");
 	}
-	@Test
-	public void whenExit() {
-		StubInput input = new StubInput(
-				new String[] {"0"}
-		);
-		StubAction action = new StubAction();
-		new StartUI().init(input, new Tracker(), new UserAction[] { action });
-		assertThat(action.isCall(), is(true));
-	}
-
-//	@Test
-//	public void whenAddItem() {
-//		String[] answers = {"Fix PC"};
-//		Input input = new StubInput(answers);
-//		Tracker tracker = new Tracker();
-//		StartUI.createItem(input, tracker);
-//		Item created = tracker.findAll()[0];
-//		Item expected = new Item("Fix PC");
-//		assertThat(created.getName(), is(expected.getName()));
-//	}
-//	@Test
-//		public void whenReplaceItem() {
-//			Tracker tracker = new Tracker();
-//			Item item = new Item("new item");
-//			tracker.add(item);
-//			String[] answers = {
-//					item.getId(), // id сохраненной заявки в объект tracker.
-//					"replaced item"
-//			};
-//			StartUI.replaceItem(new StubInput(answers), tracker);
-//			Item replaced = tracker.findById(item.getId());
-//			assertThat(replaced.getName(), is("replaced item"));
-//		}
-//		@Test
-//	public void deleteItem() {
-//			Tracker tracker = new Tracker();
-//			long created = System.currentTimeMillis();
-//			Item item = tracker.add(new Item("test name", "desc", created));
-//			Input input = new StubInput(new String[]{"3", item.getId(), "y"});
-//			new StartUI(input, tracker).init();
-//			Item delItem = null;
-//			assertThat(tracker.findById(item.getId()), is(delItem));
-//		}
-	@Test
-	public void whenPrtMenu() {
-		StubInput input = new StubInput(
-				new String[] {"0"}
-		);
-		StubAction action = new StubAction();
-		new StartUI().init(input, new Tracker(), new UserAction[] { action });
-		String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-				.add("0. Stub action")
-				.toString();
-		assertThat(new String(out.toByteArray()), is(expect));
-		System.setOut(stdout);
+	private static String menu() {
+		StringBuilder builder = new StringBuilder();
+		String ln = System.lineSeparator();
+		builder.append("*********** МЕНЮ ***********");
+		builder.append(ln);
+		builder.append("0 : Добавление новой заявки");
+		builder.append(ln);
+		builder.append("1 : Отобразить все заявки");
+		builder.append(ln);
+		builder.append("2 : Замена заявки");
+		builder.append(ln);
+		builder.append("3 : Удаление заявки");
+		builder.append(ln);
+		builder.append("4 : Поиск заявки по ID");
+		builder.append(ln);
+		builder.append("5 : Поиск заявки по имени");
+		builder.append(ln);
+		builder.append("6 : Выход");
+		builder.append(ln);
+		return builder.toString();
 	}
 
+	@Test
+	public void whenUserAddItem() {
+		List<String> list = new ArrayList<>();
+		list.add("0");
+		list.add("1");
+//		list.add("2");
+//		list.add("3");
+		Input input = new StubInput(list);
+		new StartUI(input, this.tracker, this.output).init();
+		assertThat(this.tracker.findAll().get(0).getName(), is("1"));
+	}
+
+	@Test
+	public void whenShowAllItem() {
+		StringBuilder builder = new StringBuilder();
+		Item item1 = tracker.add(new Item("test1", "desc1"));
+		Item item2 = tracker.add(new Item("test2", "desc2"));
+		Item item3 = tracker.add(new Item("test3", "desc3"));
+		List<String> list = new ArrayList<>();
+		list.add("1");
+		list.add("6");
+		Input input = new StubInput(list);
+		new StartUI(input, this.tracker, this.output).init();
+		List<Item> items = new ArrayList<>();
+		items.add(item1);
+		items.add(item2);
+		items.add(item3);
+		builder.append(MENU);
+		builder.append("--------- Показать все заявки -----------").append(ln);
+		builder.append("Результат:").append(ln);
+		builder.append(item1.toString()).append(ln);
+		builder.append("--------- Показать все заявки -----------").append(ln);
+		builder.append("Результат:").append(ln);
+		builder.append(item2.toString()).append(ln);
+		builder.append("--------- Показать все заявки -----------").append(ln);
+		builder.append("Результат:").append(ln);
+		builder.append(item3.toString()).append(ln);
+		builder.append(MENU);
+		assertThat(this.output.toString(), is(builder.toString()));
+	}
+
+	@Test
+	public void whenUpdateThenTrackerHasUpdatedItem() {
+		Item item = this.tracker.add(new Item("test1", "desc1"));
+		List<String> list = new ArrayList<>();
+		list.add("2");
+		list.add(item.getId());
+		list.add("test replace");
+		list.add("updated");
+		list.add("6");
+		Input input = new StubInput(list);
+		new StartUI(input, this.tracker, output).init();
+		assertThat(tracker.findById(item.getId()).getName(), is("test replace"));
+	}
+
+	@Test
+	public <delete> void whenUserDeleteItemThenTrackerDeleteItem() {
+		Item item = tracker.add(new Item("test1", "desc1"));
+		List<String> list = new ArrayList<>();
+		list.add("3");
+		list.add(item.getId());
+		list.add("6");
+		Input input = new StubInput(list);
+		new StartUI(input, this.tracker, output).init();
+		Item deleteItem = null;
+		assertThat(tracker.findById(item.getId()), is((delete) null));
+	}
+
+	@Test
+	public void whenUserFindsItemByIdThenTrackerFindsItem() {
+		StringBuilder builder = new StringBuilder();
+		Item item = tracker.add(new Item("test1", "desc1"));
+		List<String> list = new ArrayList<>();
+		list.add("4");
+		list.add(item.getId());
+		list.add("6");
+		Input input = new StubInput(list);
+		new StartUI(input, tracker, output).init();
+		List<Item> items = new ArrayList<>();
+		items.add(item);
+		builder.append(MENU);
+		builder.append("----------- Поиск заявки по ID -----------").append(ln);
+		builder.append("Результат:").append(ln);
+		builder.append("----------- Заявка найдена! --------------").append(ln);
+		builder.append(item.toString()).append(ln);
+		builder.append(MENU);
+		assertThat(this.output.toString(), is(builder.toString()));
+	}
+
+	@Test
+	public void whenFindItemByName() {
+		StringBuilder builder = new StringBuilder();
+		Item item = this.tracker.add(new Item("test name", "desc"));
+		List<String> list = new ArrayList<>();
+		list.add("5");
+		list.add(item.getName());
+		list.add("6");
+		Input input = new StubInput(list);
+		new StartUI(input, this.tracker, output).init();
+		List<Item> items = new ArrayList<>();
+		items.add(item);
+		builder.append(MENU);
+		builder.append("----------- Поиск заявки по имени -----------").append(ln);
+		builder.append("Результат:").append(ln);
+		builder.append("----------- Заявка найдена! --------------").append(ln);
+		builder.append(item.toString()).append(ln);
+		builder.append(MENU);
+		assertThat(this.output.toString(), is(builder.toString()));
+	}
 }

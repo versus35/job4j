@@ -65,11 +65,11 @@ public class TrackerTest {
 		Item item = new Item("test7", "test7");
 		Item item1 = new Item("test8", "test8");
 		tracker.add(item);
-		tracker.add(item1);
 		List<Item> list = new ArrayList<>();
 		list.add(item);
 		list.add(item1);
-		assertThat(tracker.findByName("test8"), is(list));
+		//tracker.add(item1);
+		assertThat(Arrays.asList(tracker.findByName("test7")), is(item));
 	}
 
 	@Test

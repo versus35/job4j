@@ -1,9 +1,15 @@
 package ru.job4j.tracker;
 
-public class FindByNameAction extends BaseAction {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
-	protected FindByNameAction(int key, String name) {
+public class FindByNameAction extends BaseAction {
+	private final Consumer<String> output;
+
+	protected FindByNameAction(int key, String name, Consumer<String> output) {
 		super(key, name);
+		this.output = output;
 	}
 
 	@Override
@@ -13,13 +19,19 @@ public class FindByNameAction extends BaseAction {
 
 	@Override
 	public boolean execute(Input input, Tracker tracker) {
-		System.out.println("-- Писк заявки по имени --");
+		boolean found = false;
+		System.out.println("-- Поиск заявки по имени --");
 		System.out.println("Введите имя: ");
-		String name = input.askStr("");
-		Item[] item = tracker.findByName(name);
-		for (int i = 0; i < item.length; i++) {
-			System.out.println("Заявка " + item[i].getId());
-			System.out.println("Имя " + item[i].getName());
+		String name = input.ask("");
+//		Item item = tracker.findByName(name);
+		for(Item item :tracker.findByName(name))
+		if (item != null) {
+			System.out.println("Заявка " + item.getName());
+			System.out.println("Имя " + item.getId());
+			found = true;
+		}
+		if (!found) {
+			System.out.println("Заявка не найдена: ");
 		}
 
 		return true;

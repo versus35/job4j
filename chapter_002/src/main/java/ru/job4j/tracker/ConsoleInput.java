@@ -1,26 +1,30 @@
 package ru.job4j.tracker;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {
 	private Scanner scanner = new Scanner(System.in);
+
 	@Override
-	public String askStr(String question) {
+	public String ask(String question) {
 		System.out.print(question);
 		return scanner.nextLine();
 	}
 
 	@Override
-	public int askInt(String question) {
-		return Integer.valueOf(askStr(question));
-	}
-
-	@Override
-	public int askInt(String question, int max) {
-		int select = askInt(question);
-		if (select < 0 || select >= max) {
-			throw new IllegalStateException(String.format("Out of about %s", select, max));
+	public int ask(String question, List<Integer> range) {
+		int key = Integer.parseInt(this.ask(question));
+		boolean exist = false;
+		for (int answer : range) {
+			if (answer == key) {
+				exist = true;
+				break;
+			}
 		}
-		return select;
+		if (!exist) {
+			throw new MenuOutException("Нет такого пункта меню");
+		}
+		return key;
 	}
 }

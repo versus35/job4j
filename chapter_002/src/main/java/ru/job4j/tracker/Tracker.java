@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ public class Tracker {
 
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		this.items.add(position++, item);
+		this.items.add(this.position++, item);
 		return item;
 	}
 
@@ -39,15 +38,12 @@ public class Tracker {
 
 	public boolean delete(String id) {
 		boolean result = false;
-		for (int i = 0; i < position; i++) {
-			if (items.get(i) != null && items.get(i).equals(id)) {
-				System.arraycopy(this.items, i + 1, items, i, this.position - i);
-				position--;
+		for (int index = 0; index != items.size(); index++) {
+			if (this.items.get(index).getId().equals(id)) {
+				this.items.remove(index);
 				result = true;
 				break;
-
 			}
-
 		}
 		return result;
 	}
@@ -57,14 +53,33 @@ public class Tracker {
 	}
 
 	public List<Item> findByName(String key) {
-		return items.stream()
-				.filter(i -> i.getName() == key)
-				.collect(Collectors.toList());
+//		return items.stream()
+//				.filter(i -> i.getName().equals(key))
+//				.collect(Collectors.toList());
+		List<Item> list = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) == null) {
+				break;
+			}
+			if (list.get(i).getName().equals(key)) {
+				list.add(list.get(i));
+			}
+		}
+		return list;
 	}
 
+
 	public Item findById(String id) {
-		return items.stream()
-				.filter(i -> i.getId() == id)
-				.findFirst().orElse(null);
+//		return items.stream()
+//				.filter(i -> i.getId().equals(id))
+//				.findFirst().orElse(null);
+		Item result = null;
+		for (Item item : items) {
+			if (item != null && item.getId().equals(id)) {
+				result = item;
+				break;
+			}
+		}
+		return result;
 	}
 }

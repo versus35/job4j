@@ -1,27 +1,35 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class StubInput implements Input {
-	private String[] answers;
-	private int position = 0;
+	private List<String> answers;
+	private int position;
 
-	public StubInput(String[] answers) {
-
+	public StubInput(List<String> answers) {
 		this.answers = answers;
 	}
 
 	@Override
-	public String askStr(String question) {
-		return answers[position++];
+	public String ask(String question) {
+		return this.answers.get(position++);
 	}
 
 	@Override
-	public int askInt(String question) {
-		return Integer.valueOf(askStr(question));
+	public int ask(String question, List<Integer> range) {
+		boolean exist = false;
+		int key = Integer.parseInt(this.answers.get(position++));
+		for (int number : range) {
+			if (number == key) {
+				exist = true;
+				//break;
+			}
+		}
+		if (!exist) {
+			throw new MenuOutException("Out of menu range.");
+		}
+		return key;
 	}
 
 
-	@Override
-	public int askInt(String question, int max) {
-		return askInt(question);
-	}
 }

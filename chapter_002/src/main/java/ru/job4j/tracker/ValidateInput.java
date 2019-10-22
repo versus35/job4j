@@ -1,48 +1,34 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 public class ValidateInput extends ConsoleInput {
+
 	private final Input input;
 
-
-	public ValidateInput(Input input) {
+	public ValidateInput(final Input input) {
 		this.input = input;
 	}
 
 	@Override
-	public String askStr(String question) {
-		return input.askStr(question);
+	public String ask(String question) {
+		return this.input.ask(question);
 	}
 
 	@Override
-	public int askInt(String question) {
+	public int ask(String question, List<Integer> range) {
 		boolean invalid = true;
-		int value = -1;
+		int answer = -1;
 		do {
 			try {
-				value = super.askInt(question);
+				answer = this.input.ask(question, range);
 				invalid = false;
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please enter validate data again ");
+			} catch (MenuOutException e) {
+				System.out.print(String.format("Пожалуйста, выберите пункт меню.%n"));
+			} catch (NumberFormatException e) {
+				System.out.print(String.format("Пожалуйста, введите корректное значение.%n"));
 			}
 		} while (invalid);
-		return value;
-	}
-
-
-	@Override
-	public int askInt(String question, int max) {
-		boolean invalid = true;
-		int value = -1;
-		do {
-			try {
-				value = input.askInt(question, max);
-				invalid = false;
-			} catch (IllegalStateException moe) {
-				System.out.println("Please select key from menu.");
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please enter validate data again.");
-			}
-		} while (invalid);
-		return value;
+		return answer;
 	}
 }

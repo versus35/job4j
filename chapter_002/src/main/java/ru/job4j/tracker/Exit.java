@@ -1,10 +1,14 @@
 package ru.job4j.tracker;
 
 
-public class Exit extends BaseAction {
+import java.util.function.Consumer;
 
-	protected Exit(int key, String name) {
+public class Exit extends BaseAction {
+	private final Consumer<String> output;
+
+	protected Exit(int key, String name, Consumer<String> output) {
 		super(key, name);
+		this.output = output;
 	}
 
 	@Override

@@ -5,7 +5,7 @@ public class StubAction implements UserAction {
 
 	@Override
 	public int key() {
-		return 0;
+		return key();
 	}
 
 	@Override
@@ -14,10 +14,16 @@ public class StubAction implements UserAction {
 	}
 
 	@Override
+	public String info() {
+		return info();
+	}
+
+	@Override
 	public boolean execute(Input input, Tracker tracker) {
 		call = true;
 		return false;
 	}
+
 	public boolean isCall() {
 		return call;
 	}
