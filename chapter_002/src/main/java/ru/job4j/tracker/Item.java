@@ -5,7 +5,7 @@ public class Item {
 	private String name;
 	private String decs;
 	private long time;
-	private String test_name;
+	private String testName;
 	private String test;
 
 	public Item(String id, String name, String decs, long time) {
@@ -19,8 +19,8 @@ public class Item {
 		this.name = name;
 	}
 
-	public Item(String test_name, String test) {
-		this.test_name = test_name;
+	public Item(String testName, String test) {
+		this.testName = testName;
 		this.test = test;
 	}
 

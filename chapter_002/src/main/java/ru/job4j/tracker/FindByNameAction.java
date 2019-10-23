@@ -24,16 +24,17 @@ public class FindByNameAction extends BaseAction {
 		System.out.println("Введите имя: ");
 		String name = input.ask("");
 //		Item item = tracker.findByName(name);
-		for(Item item :tracker.findByName(name))
-		if (item != null) {
-			System.out.println("Заявка " + item.getName());
-			System.out.println("Имя " + item.getId());
-			found = true;
+		for (Item item : tracker.findByName(name)) {
+			if (item != null) {
+				System.out.println("Заявка " + item.getName());
+				System.out.println("Имя " + item.getId());
+				found = true;
+			}
+			if (!found) {
+				System.out.println("Заявка не найдена: ");
+			}
 		}
-		if (!found) {
-			System.out.println("Заявка не найдена: ");
-		}
-
 		return true;
 	}
 }
+

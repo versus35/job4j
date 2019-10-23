@@ -1,14 +1,14 @@
 package ru.job4j.stragery;
 
-public class Square implements Shape {
+public class Square implements ru.job4j.stragery.Shape {
 	@Override
 	public String draw() {
 		StringBuilder pic = new StringBuilder();
-		pic.append("□□□□□□□□□").append(std);;
-		pic.append("□       □").append(std);;
-		pic.append("□       □").append(std);;
-		pic.append("□       □").append(std);;
-		pic.append("□□□□□□□□□").append(std);;
+		pic.append("□□□□□□□□□").append(SHAPE);
+		pic.append("□       □").append(SHAPE);
+		pic.append("□       □").append(SHAPE);
+		pic.append("□       □").append(SHAPE);
+		pic.append("□□□□□□□□□").append(SHAPE);
 		return pic.toString();
 	}
 
