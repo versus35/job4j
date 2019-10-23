@@ -10,7 +10,8 @@ public class SortUser {
 	public Set<User> sort(List<User> list) {
 		return new TreeSet<>(list);
 	}
-	public List<User> sortAge (List<User> list) {
+
+	public List<User> sortAge(List<User> list) {
 		list.sort(Comparator.comparing(User::getAge));
 		return list;
 	}
@@ -24,6 +25,7 @@ public class SortUser {
 		});
 		return list;
 	}
+
 	List<User> sortNameByAge(List<User> list) {
 		list.sort(new Comparator<User>() {
 			@Override

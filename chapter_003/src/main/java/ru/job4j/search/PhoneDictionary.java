@@ -11,15 +11,15 @@ public class PhoneDictionary {
 	public void add(Person persons) {
 		this.persons.add(persons);
 	}
+
 	public List<Person> find(String key) {
 		List<Person> result = new ArrayList<>();
-		for (Person value : persons) {
-			if((key.contains(value.getName())
-				||key.contains(value.getSurname())
-				||key.contains(value.getPhone())
-				||key.contains(value.getAddress())
-			)) {
-				result.add(value);
+		for (Person person : this.persons) {
+			if (person.getAddress().contains(key)
+					|| person.getName().contains(key)
+					|| person.getPhone().contains(key)
+					|| person.getSurname().contains(key)) {
+				result.add(person);
 			}
 		}
 		return result;

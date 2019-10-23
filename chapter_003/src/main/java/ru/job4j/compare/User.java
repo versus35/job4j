@@ -3,17 +3,20 @@ package ru.job4j.compare;
 import java.awt.*;
 import java.util.Objects;
 
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
 	private String name;
 	private int age;
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		User user = (User) o;
-		return age == user.age &&
-				Objects.equals(name, user.name);
+		return age == user.age && Objects.equals(name, user.name);
 	}
 
 	@Override
@@ -31,10 +34,9 @@ public class User implements Comparable<User>{
 
 	@Override
 	public String toString() {
-		return "User{" +
-				"name='" + name + '\'' +
-				", age=" + age +
-				'}';
+		return "User{"
+				+ "name='" + name + '\''
+				+ ", age=" + age + '}';
 	}
 
 	public int getAge() {
@@ -49,10 +51,13 @@ public class User implements Comparable<User>{
 		this.name = name;
 		this.age = age;
 	}
+
 	@Override
 	public int compareTo(User o) {
 		int nameCompare = this.name.compareTo(o.name == null ? "" : o.name);
-		if(nameCompare == 0) return Integer.compare(this.age, o.age);
+		if (nameCompare == 0) {
+			return Integer.compare(this.age, o.age);
+		}
 		return nameCompare;
 	}
 }
