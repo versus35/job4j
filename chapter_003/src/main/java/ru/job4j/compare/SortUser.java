@@ -24,4 +24,14 @@ public class SortUser {
 		});
 		return list;
 	}
+	List<User> sortNameByAge(List<User> list) {
+		list.sort(new Comparator<User>() {
+			@Override
+			public int compare(User o1, User o2) {
+				int result = o1.getName().compareTo(o2.getName());
+				return result != 0 ? result : Integer.compare(o1.getAge(), o2.getAge());
+			}
+		});
+		return list;
+	}
 }
