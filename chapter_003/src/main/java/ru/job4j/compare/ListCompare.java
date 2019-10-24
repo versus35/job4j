@@ -14,8 +14,9 @@ public class ListCompare implements Comparator<String> {
 		int min = Math.min(size1, size1);
 		int index = 0;
 		while (index < min) {
-			if (Character.compare(left.charAt(index), right.charAt(index)) != 0) {
-				result = Character.compare(left.charAt(index), right.charAt(index));
+			int compare = Character.compare(left.charAt(index), right.charAt(index));
+			if (compare != 0) {
+				result = compare;
 				break;
 			}
 			index++;
