@@ -37,12 +37,13 @@ public class PaintTest {
 				this.out.toString(),
 				is(
 						new StringBuilder()
-								.append("□□□□□□□□□").append(std)
-								.append("□       □").append(std)
-								.append("□       □").append(std)
-								.append("□       □").append(std)
-								.append("□□□□□□□□□").append(std)
-								.append(System.lineSeparator())
+								.append("□□□□□□□□□")
+								.append("□       □")
+								.append("□       □")
+								.append("□       □")
+								.append("□□□□□□□□□")
+								.append(std)
+								.append(std)
 								.toString()
 				)
 		);
@@ -54,17 +55,16 @@ public class PaintTest {
 		new Paint().draw(new Triangle());
 		// проверяем результат вычисления
 		assertThat(
-				this.out.toString(),
+				new String(out.toByteArray()),
 				is(
 						new StringBuilder()
-								.append("    △").append(std)
-								.append("   △ △").append(std)
-								.append("  △   △").append(std)
-								.append(" △     △").append(std)
-								.append("△△△△△△△").append(std)
-								.append(System.lineSeparator())
-								.toString()
-				)
-		);
+								.append("    △")
+								.append("   △ △")
+								.append("  △   △")
+								.append(" △     △")
+								.append("△△△△△△△")
+								.append(std)
+								.append(std)
+								.toString()));
 	}
 }

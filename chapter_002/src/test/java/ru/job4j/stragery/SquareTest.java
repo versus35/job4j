@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 public class SquareTest {
 	@Test
 	public void whenSquare() {
+		String std = System.lineSeparator();
 		Square square = new Square();
 		assertThat(square.draw(),
 				is(new StringBuilder()
@@ -16,6 +17,7 @@ public class SquareTest {
 						.append("□       □")
 						.append("□       □")
 						.append("□□□□□□□□□")
+						.append(std)
 						.toString()
 				));
 	}

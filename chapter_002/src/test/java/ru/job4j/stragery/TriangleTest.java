@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 public class TriangleTest {
 	@Test
 	public void whenTriangle() {
+		String std = System.lineSeparator();
 		Triangle triangle = new Triangle();
 		assertThat(triangle.draw(),
 				is(
@@ -17,6 +18,7 @@ public class TriangleTest {
 								.append("  △   △")
 								.append(" △     △")
 								.append("△△△△△△△")
+								.append(std)
 								.toString()
 
 				));
