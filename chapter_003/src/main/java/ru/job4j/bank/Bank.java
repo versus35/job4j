@@ -31,7 +31,7 @@ public class Bank {
 	 */
 
 	public void addUsers(User user) {
-		userListMap.putIfAbsent(user, new ArrayList<Account>());
+		userListMap.putIfAbsent(user, new ArrayList<>());
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Bank {
 	private User findUser(String passport) {
 		User result = User.EMPTY;
 		for (Map.Entry<User, List<Account>> entry : userListMap.entrySet()) {
-			if (entry.getKey().getPassport() == passport) {
+			if (entry.getKey().getPassport().equals(passport)) {
 				result = entry.getKey();
 				break;
 			}
@@ -92,7 +92,14 @@ public class Bank {
 	 */
 
 	public List<Account> getUsersAccount(String passport) {
-		return userListMap.get(findUser(passport));
+		List<Account> accounts = new ArrayList<>();
+		for (Map.Entry<User, List<Account>> entry : userListMap.entrySet()) {
+			if (entry.getKey().getPassport().equals(passport)) {
+				accounts = entry.getValue();
+				break;
+			}
+		}
+		return accounts;
 	}
 
 	/**
@@ -103,8 +110,8 @@ public class Bank {
 	 */
 
 	public Account getUsersActualAccount(String passport, String requisite) {
-		Account userAccount = accountFirst;
-		ArrayList<Account> userAccounts = (ArrayList<Account>) getUsersAccount(passport);
+		Account userAccount = null;
+		List<Account> userAccounts = getUsersAccount(passport);
 		if (userAccounts.size() > 0) {
 			for (Account account : userAccounts) {
 				if (account.getRequisites().equals(requisite)) {
@@ -133,6 +140,8 @@ public class Bank {
 		Account second = getUsersActualAccount(destPassport, dstRequisite);
 		if (first != null && second != null) {
 			if (first.getValue() >= amount) {
+				first.offsAmount(amount);
+				second.addAmount(amount);
 				result = true;
 			}
 		}
