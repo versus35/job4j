@@ -3,7 +3,7 @@ package ru.job4j.bank;
 import java.util.*;
 
 public class Account {
-	private String User;
+	private String user;
 	private double value;
 	private String requisites;
 
@@ -13,7 +13,7 @@ public class Account {
 	}
 
 	public String getUser() {
-		return User;
+		return user;
 	}
 
 	public double getValue() {
