@@ -24,6 +24,7 @@ public class SortUser {
 			}
 		});
 		return list;
+
 	}
 
 	List<User> sortNameByAge(List<User> list) {
