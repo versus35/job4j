@@ -21,6 +21,9 @@ public class ListCompare implements Comparator<String> {
 			}
 			index++;
 		}
+		if (size1 != size2 && index == 0) {
+			result = size1 - size2;
+		}
 		return result;
 	}
 }
