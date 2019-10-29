@@ -61,7 +61,8 @@ public class SortUserTest {
 		list.add(user1);
 		list.add(user2);
 		list.add(user3);
-		List<User> result = sortUser.sortNameByAge(list);
+		List<User> result = sortUser.sortNameByAge(
+				list);
 		List<User> expected = new ArrayList<>();
 		expected.add(user3);
 		expected.add(user1);
