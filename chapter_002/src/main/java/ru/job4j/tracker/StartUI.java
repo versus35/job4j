@@ -8,17 +8,18 @@ import java.util.function.Consumer;
 public class StartUI {
 
 	private boolean exit = true;
-
+	private final Consumer<String> output;
 	private MenuTracker menu;
 
 	private final Input input;
 
-	StartUI(Input input, Tracker tracker, Consumer<String> output) {
+	public StartUI(Input input, Tracker tracker, Consumer<String> output) {
 		this.input = input;
 		this.menu = new MenuTracker(this.input, tracker, output);
+		this.output = output;
 	}
 
-	void init() {
+	public void init() {
 		menu.fillActions(this);
 		List<Integer> keys = menu.range();
 		do {
