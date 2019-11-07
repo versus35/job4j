@@ -2,36 +2,38 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
+
 public class Tracker {
+
 	private final List<Item> items = new ArrayList<>();
-	private int position = 0;
 
-	private String generateId() {
-		long time = System.currentTimeMillis();
-		long rm = (long) (Math.random() * time);
-		return String.valueOf(rm);
-
-	}
+	private static final Random RN = new Random();
 
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		this.items.add(this.position++, item);
+		this.items.add(item);
 		return item;
 	}
 
-	public boolean replace(Item item, String id) {
+	private String generateId() {
+		return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
+	}
+
+	public boolean replace(String id, Item item) {
 		boolean result = false;
-		if (position != 0) {
-			for (int i = 0; i < position; i++) {
-				if (items.get(i).getId().equals(id)) {
-					item.setId(id);
-					items.set(i, item);
-					result = true;
-					break;
-				}
+		System.out.println(id);
+		int index = 0;
+		for (Item it : items) {
+			if (it != null && it.getId().equals(id)) {
+				item.setId(id);
+				items.set(index, item);
+				result = true;
+				break;
 			}
+			index++;
 		}
 		return result;
 	}
@@ -48,38 +50,15 @@ public class Tracker {
 		return result;
 	}
 
-	public List<Item> findAll() {
-		return this.items;
+	public ArrayList<Item> findAll() {
+		return new ArrayList<>(items);
 	}
 
 	public List<Item> findByName(String key) {
-//		return items.stream()
-//				.filter(i -> i.getName().equals(key))
-//				.collect(Collectors.toList());
-		List<Item> list = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) == null) {
-				break;
-			}
-			if (list.get(i).getName().equals(key)) {
-				list.add(list.get(i));
-			}
-		}
-		return list;
+		return items.stream().filter(x -> x.getName().equals(key)).collect(Collectors.toList());
 	}
 
-
 	public Item findById(String id) {
-//		return items.stream()
-//				.filter(i -> i.getId().equals(id))
-//				.findFirst().orElse(null);
-		Item result = null;
-		for (Item item : items) {
-			if (item != null && item.getId().equals(id)) {
-				result = item;
-				break;
-			}
-		}
-		return result;
+		return items.stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
 	}
 }

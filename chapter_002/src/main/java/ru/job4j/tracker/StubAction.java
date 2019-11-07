@@ -8,10 +8,6 @@ public class StubAction implements UserAction {
 		return key();
 	}
 
-	@Override
-	public String name() {
-		return "Stub action";
-	}
 
 	@Override
 	public String info() {
@@ -19,12 +15,8 @@ public class StubAction implements UserAction {
 	}
 
 	@Override
-	public boolean execute(Input input, Tracker tracker) {
+	public void execute(Input input, Tracker tracker) {
 		call = true;
-		return false;
-	}
 
-	public boolean isCall() {
-		return call;
 	}
 }

@@ -6,29 +6,22 @@ import java.util.function.Consumer;
 public class ReplaceItem extends BaseAction {
 	private final Consumer<String> output;
 
-	protected ReplaceItem(int key, String name, Consumer<String> output) {
-		super(key, name);
+	public ReplaceItem(int key, String info, Consumer<String> output) {
+		super(key, info);
 		this.output = output;
 	}
 
 	@Override
-	public String name() {
-		return "=== Редактирование заявки ===";
-	}
-
-	@Override
-	public boolean execute(Input input, Tracker tracker) {
-		System.out.println("-- Редактирование заявки --");
-		System.out.println("Введите ID заявки: ");
-		String id = input.ask("");
-		System.out.println("Введите имя: ");
-		String name = input.ask("");
-		Item item1 = new Item(name);
-		if (tracker.replace(item1, id)) {
-			System.out.println("Заявка: " + id + " обновлена");
+	public void execute(Input input, Tracker tracker) {
+		output.accept("------------- Замена заявки ---------------");
+		String id = input.ask("Введите Id заявки, для ее изменения :");
+		String name = input.ask("Введите новое имя заявки :");
+		String desc = input.ask("Введите новое описание заявки :");
+		Item item = new Item(name, desc);
+		if (tracker.replace(id, item)) {
+			output.accept("------------ Новая заявка с Id: " + item.getId() + " " + "заменена!");
 		} else {
-			System.out.println("Заявки с ID: " + id + " не существует");
+			output.accept("------------ Заявка не заменена!------------");
 		}
-		return true;
 	}
 }

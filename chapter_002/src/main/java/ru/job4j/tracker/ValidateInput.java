@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.List;
 
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
 
 	private final Input input;
 
@@ -17,6 +17,7 @@ public class ValidateInput extends ConsoleInput {
 
 	@Override
 	public int ask(String question, List<Integer> range) {
+
 		boolean invalid = true;
 		int answer = -1;
 		do {

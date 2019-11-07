@@ -6,24 +6,22 @@ import java.util.function.Consumer;
 public class FindAllAction extends BaseAction {
 	private final Consumer<String> output;
 
-	protected FindAllAction(int key, String name, Consumer<String> output) {
-		super(key, name);
+	public FindAllAction(int key, String info, Consumer<String> output) {
+		super(key, info);
 		this.output = output;
 	}
 
 	@Override
-	public String name() {
-		return "=== Поиск всех заявок ===";
-	}
-
-	@Override
-	public boolean execute(Input input, Tracker tracker) {
-		System.out.println("-- Поиск всех заявок --");
-		List<Item> allItems = tracker.findAll();
-		for (Item i : allItems) {
-			System.out.println("Заявка: " + i.getId());
-			System.out.println("Имя: " + i.getName());
+	public void execute(Input input, Tracker tracker) {
+		for (Item item : tracker.findAll()) {
+			output.accept("--------- Показать все заявки -----------");
+			output.accept("Результат:");
+			output.accept(
+					"ID заявки:   |" + item.getId() + '\n' + '\r'
+							+
+							"Имя заявки:  |" + item.getName() + '\n' + '\r'
+							+
+							"Описание:    |" + item.getDesc());
 		}
-		return true;
 	}
 }

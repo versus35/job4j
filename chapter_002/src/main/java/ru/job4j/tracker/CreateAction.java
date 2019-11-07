@@ -5,24 +5,18 @@ import java.util.function.Consumer;
 public class CreateAction extends BaseAction {
 	private final Consumer<String> output;
 
-	protected CreateAction(int key, String name, Consumer<String> output) {
-		super(key, name);
+	public CreateAction(int key, String info, Consumer<String> output) {
+		super(key, info);
 		this.output = output;
 	}
 
 	@Override
-	public String name() {
-		return "=== Добавление новой заявки ===";
-	}
-
-	@Override
-	public boolean execute(Input input, Tracker tracker) {
-		System.out.println("-- Добавление новой заявки --");
-		System.out.println("Введите имя: ");
-		String name = input.ask(" ");
-		Item item = new Item(name);
+	public void execute(Input input, Tracker tracker) {
+		output.accept("-------- Добавление новой заявки ----------");
+		String name = input.ask("Пожалуйста, введите имя заявки:");
+		String desc = input.ask("Пожалуйста, введите описание заявки:");
+		Item item = new Item(name, desc);
 		tracker.add(item);
-		System.out.println("Новая заявка " + item.getId() + " добавлена");
-		return true;
+		output.accept("Новая заявка с Id: " + item.getId() + " " + "добавлена!");
 	}
 }

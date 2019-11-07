@@ -10,7 +10,6 @@ public class StartUI {
 	private boolean exit = true;
 	private final Consumer<String> output;
 	private MenuTracker menu;
-
 	private final Input input;
 
 	public StartUI(Input input, Tracker tracker, Consumer<String> output) {

@@ -1,27 +1,30 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ * Задача
+ *
+ * @author Alexander Abramov (alllexe@mail.ru)
+ * @version 1
+ * @since 01.02.2019
+ */
 public class Item {
 	private String id;
 	private String name;
-	private String decs;
+	private String desc;
 	private long time;
-	private String testName;
-	private String test;
 
-	public Item(String id, String name, String decs, long time) {
-		this.id = id;
+	public Item(String name, String desc, long time) {
 		this.name = name;
-		this.decs = decs;
+		this.desc = desc;
 		this.time = time;
 	}
 
-	public Item(String name) {
+	public Item(String name, String desc) {
 		this.name = name;
-	}
-
-	public Item(String testName, String test) {
-		this.testName = testName;
-		this.test = test;
+		this.desc = desc;
 	}
 
 	public String getId() {
@@ -36,24 +39,29 @@ public class Item {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDesc() {
-		return decs;
+		return desc;
 	}
 
-	public void setDecs(String decs) {
-		this.decs = decs;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Item item = (Item) o;
+		return time == item.time && Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(desc, item.desc);
 	}
 
-	public long getTime() {
-		return time;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, desc, time);
 	}
 
-	public void setTime(long time) {
-		this.time = time;
+	@Override
+	public String toString() {
+		return "ID заявки:   |" + this.id + '\n' + '\r' + "Имя заявки:  |" + this.name + '\n' + '\r' + "Описание:    |" + this.desc;
 	}
-
 }

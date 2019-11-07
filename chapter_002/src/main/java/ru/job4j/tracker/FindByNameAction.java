@@ -7,34 +7,32 @@ import java.util.function.Consumer;
 public class FindByNameAction extends BaseAction {
 	private final Consumer<String> output;
 
-	protected FindByNameAction(int key, String name, Consumer<String> output) {
-		super(key, name);
+	public FindByNameAction(int key, String info, Consumer<String> output) {
+		super(key, info);
 		this.output = output;
 	}
 
 	@Override
-	public String name() {
-		return "=== Поиск заявки по имени ===";
-	}
-
-	@Override
-	public boolean execute(Input input, Tracker tracker) {
+	public void execute(Input input, Tracker tracker) {
 		boolean found = false;
-		System.out.println("-- Поиск заявки по имени --");
-		System.out.println("Введите имя: ");
-		String name = input.ask("");
-//		Item item = tracker.findByName(name);
-		for (Item item : tracker.findByName(name)) {
+		List<Item> items = tracker.findByName(input.ask("Введите имя заявки, для ее поиска :"));
+		output.accept("----------- Поиск заявки по имени -----------");
+		for (Item item : items) {
 			if (item != null) {
-				System.out.println("Заявка " + item.getName());
-				System.out.println("Имя " + item.getId());
+				output.accept("Результат:");
+				output.accept("----------- Заявка найдена! --------------");
+				output.accept("ID заявки:   |" + item.getId() + '\n' + '\r'
+						+
+						"Имя заявки:  |" + item.getName() + '\n' + '\r'
+						+
+						"Описание:    |" + item.getDesc());
 				found = true;
-			}
-			if (!found) {
-				System.out.println("Заявка не найдена: ");
+				break;
 			}
 		}
-		return true;
+		if (!found) {
+			output.accept("Результат:");
+			output.accept("----------- Заявка не найдена! --------------");
+		}
 	}
 }
-
