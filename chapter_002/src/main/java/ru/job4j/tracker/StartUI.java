@@ -8,29 +8,27 @@ import java.util.function.Consumer;
 public class StartUI {
 
 	private boolean exit = true;
+
 	private MenuTracker menu;
 
 	private final Input input;
 
-
-	public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+	StartUI(Input input, Tracker tracker, Consumer<String> output) {
 		this.input = input;
-		this.menu = new MenuTracker(output, this.input, tracker);
-
+		this.menu = new MenuTracker(this.input, tracker, output);
 	}
 
-	public void init() {
+	void init() {
 		menu.fillActions(this);
-		List<Integer> key = menu.range();
+		List<Integer> keys = menu.range();
 		do {
 			menu.show();
-			int ask = this.input.ask("ВВЕДИТЕ ПУНКТ МЕНЮ : ", key);
+			int ask = this.input.ask("ВВЕДИТЕ ПУНКТ МЕНЮ : ", keys);
 			menu.select(ask);
 		} while (this.exit);
 	}
 
-
-	public void exit() {
+	public void stop() {
 		this.exit = false;
 	}
 
