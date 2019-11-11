@@ -55,7 +55,7 @@ public class SchoolTest {
 
 	@Test
 	public void studentToMap() {
-		Student student = new Student("Vova", "Petrov",13);
+		Student student = new Student("Vova", "Petrov", 13);
 		Student student1 = new Student("Vasya", "Ivanov", 55);
 		Student student2 = new Student("Petr", "Sergeev", 68);
 		List<Student> students = new LinkedList<>(Arrays.asList(student, student1, student2));
