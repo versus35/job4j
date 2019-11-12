@@ -5,10 +5,7 @@ package ru.job4j.bank;
  * @since 26.10.2019.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Bank {
 	private Map<User, List<Account>> userListMap = new HashMap<>();
@@ -49,10 +46,16 @@ public class Bank {
 	 */
 
 	public void addAccountToUsers(String passport, Account account) {
-		List accounts = userListMap.get(findUser(passport));
-		if (accounts != null && accounts.indexOf(account) == -1) {
-			accounts.add(account);
-		}
+//		List accounts = userListMap.get(findUser(passport));
+//		if (accounts != null && accounts.indexOf(account) == -1) {
+//			accounts.add(account);
+//		}
+		this.userListMap.keySet()
+				.stream()
+				.filter(x -> x.getPassport().equals(passport))
+				.findFirst()
+				.map(user -> userListMap.get(user))
+				.ifPresent(accounts -> accounts.add(account));
 	}
 
 	/**
@@ -62,10 +65,16 @@ public class Bank {
 	 */
 
 	public void deleteAccountToUsers(String passport, Account account) {
-		List accounts = userListMap.get(findUser(passport));
-		if (accounts != null && accounts.indexOf(account) != -1) {
-			accounts.remove(account);
-		}
+//		List accounts = userListMap.get(findUser(passport));
+//		if (accounts != null && accounts.indexOf(account) != -1) {
+//			accounts.remove(account);
+//		}
+		this.userListMap.keySet()
+				.stream()
+				.filter(x -> x.getPassport().equals(passport))
+				.findFirst()
+				.map(user -> userListMap.get(user))
+				.ifPresent(accounts -> accounts.remove(account));
 	}
 
 	/**
@@ -92,14 +101,19 @@ public class Bank {
 	 */
 
 	public List<Account> getUsersAccount(String passport) {
-		List<Account> accounts = new ArrayList<>();
-		for (Map.Entry<User, List<Account>> entry : userListMap.entrySet()) {
-			if (entry.getKey().getPassport().equals(passport)) {
-				accounts = entry.getValue();
-				break;
-			}
-		}
-		return accounts;
+//		List<Account> accounts = new ArrayList<>();
+//		for (Map.Entry<User, List<Account>> entry : userListMap.entrySet()) {
+////			if (entry.getKey().getPassport().equals(passport)) {
+////				accounts = entry.getValue();
+////				break;
+////			}
+//		}
+//		return accounts;
+		return this.userListMap.keySet()
+				.stream()
+				.filter(x -> x.getPassport().equals(passport))
+				.findFirst().map(user -> userListMap.get(user))
+				.orElse(new ArrayList<>());
 	}
 
 	/**
@@ -110,17 +124,22 @@ public class Bank {
 	 */
 
 	public Account getUsersActualAccount(String passport, String requisite) {
-		Account userAccount = null;
-		List<Account> userAccounts = getUsersAccount(passport);
-		if (userAccounts.size() > 0) {
-			for (Account account : userAccounts) {
-				if (account.getRequisites().equals(requisite)) {
-					userAccount = account;
-					break;
-				}
-			}
-		}
-		return userAccount;
+//		Account userAccount = null;
+//		List<Account> userAccounts = getUsersAccount(passport);
+//		if (userAccounts.size() > 0) {
+//			for (Account account : userAccounts) {
+//				if (account.getRequisites().equals(requisite)) {
+//					userAccount = account;
+//					break;
+//				}
+//			}
+//		}
+//		return userAccount;
+		return  getUsersAccount(passport)
+				.stream()
+				.filter(x -> x.getRequisites().equals(requisite))
+				.findFirst()
+				.orElse(null);
 	}
 
 	/**
