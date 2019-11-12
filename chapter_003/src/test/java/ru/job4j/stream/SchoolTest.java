@@ -66,6 +66,7 @@ public class SchoolTest {
 		Map<String, Student> result = School.toMap(students);
 		assertThat(result, is(expect));
 	}
+
 	@Test
 	public void levelOfTest() {
 		Student student1 = new Student(15);
