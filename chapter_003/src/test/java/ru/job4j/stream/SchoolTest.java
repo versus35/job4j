@@ -66,4 +66,18 @@ public class SchoolTest {
 		Map<String, Student> result = School.toMap(students);
 		assertThat(result, is(expect));
 	}
+	@Test
+	public void levelOfTest() {
+		Student student1 = new Student(15);
+		Student student2 = new Student(89);
+		Student student3 = new Student(55);
+		Student student4 = new Student(69);
+		Student student5 = new Student(20);
+		Student student6 = new Student(40);
+		Student student7 = new Student(75);
+		List<Student> students = new ArrayList<>(Arrays.asList(student1, null, student2, student3, student4, student5, student6, student7));
+		List<Student> result = School.levelOf(students, 50);
+		List<Student> expect = new ArrayList<>(Arrays.asList(student2, student7, student4, student3));
+		assertThat(result, is(expect));
+	}
 }
