@@ -10,7 +10,7 @@ public class SortUser {
 	}
 
 	public List<User> sortAge(List<User> list) {
-		list.sort(Comparator.comparing(User::getAge));
+		list.sort(Comparator.comparing(User::getAge).thenComparing(User::getAge));
 		return list;
 	}
 

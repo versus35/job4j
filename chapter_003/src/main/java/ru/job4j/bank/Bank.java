@@ -80,18 +80,17 @@ public class Bank {
 	/**
 	 * Метод поиска пользователя в списке по паспортным данным.
 	 * @param passport Паспортные данные пользователя.
-	 * @return Результат поиска.
 	 */
 
-	private User findUser(String passport) {
-		User result = User.EMPTY;
+	public User findUser(String passport) {
+		User user = User.EMPTY;
 		for (Map.Entry<User, List<Account>> entry : userListMap.entrySet()) {
 			if (entry.getKey().getPassport().equals(passport)) {
-				result = entry.getKey();
+				user = entry.getKey();
 				break;
 			}
 		}
-		return result;
+			return user;
 	}
 
 	/**
@@ -114,6 +113,8 @@ public class Bank {
 				.filter(x -> x.getPassport().equals(passport))
 				.findFirst().map(user -> userListMap.get(user))
 				.orElse(new ArrayList<>());
+
+
 	}
 
 	/**
