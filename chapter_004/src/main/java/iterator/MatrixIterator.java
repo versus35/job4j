@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 /**
- * Итератор для двумерного массива.
+ * Итератор для двухмерного массива.
  * @author Bulankin Viktor.
  * @version $Id$.
  * @since 05.12.2019.
@@ -66,7 +66,7 @@ public class MatrixIterator implements Iterator {
             throw new NoSuchElementException();
         }
         int elem = array[currentRow][currentColumn];
-        if (array[currentRow].length == currentColumn +1) {
+        if (array[currentRow].length == currentColumn + 1) {
             currentRow++;
             currentColumn = 0;
         } else {
