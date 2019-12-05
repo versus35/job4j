@@ -4,15 +4,38 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Итератор для четных чисел.
+ * @author Bulankin Viktor.
+ * @version $Id$.
+ * @since 05.12.2019.
+ */
+
 public class EvenNumbersIterator implements Iterator {
+    /**
+     * Обрабатываемый массив.
+     */
     private int[] array;
+    /**
+     * Текущий индекс.
+     */
     private int index;
+
+    /**
+     * Конструктор класса.
+     * @param array Обрабатываемый массив.
+     */
 
     public EvenNumbersIterator(int[] array) {
         this.array = array;
         this.index = 0;
 
     }
+
+    /**
+     * Метод проверяет наличие следующего четного числа.
+     * @return Результат проверки.
+     */
 
     @Override
     public boolean hasNext() {
@@ -28,6 +51,11 @@ public class EvenNumbersIterator implements Iterator {
         }
         return hasNext;
     }
+
+    /**
+     * Метод возвращает следующий элемент массива, содержащий четное число.
+     * @return Элемент массива.
+     */
 
     @Override
     public Object next() {
