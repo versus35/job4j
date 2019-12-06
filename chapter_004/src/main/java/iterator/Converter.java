@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Обработка итератора, содержащего другие итераторы.
+ *
  * @author Bulankin Viktor.
  * @version $Id$.
  * @since 05.12.2019.
@@ -13,6 +14,7 @@ import java.util.NoSuchElementException;
 public class Converter {
     /**
      * Метод возвращает последовательность вложенных итераторов.
+     *
      * @param it Обрабатываемый итератор.
      * @return Последовательность данных.
      */
