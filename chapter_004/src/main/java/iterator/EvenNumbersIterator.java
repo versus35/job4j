@@ -41,14 +41,22 @@ public class EvenNumbersIterator implements Iterator {
     public boolean hasNext() {
         boolean hasNext = false;
         int currentIndex = this.index;
-        while (currentIndex < array.length) {
-            if (this.array[currentIndex] % 2 == 0) {
-                hasNext = true;
-                break;
-            } else {
-                currentIndex++;
+//        while (currentIndex < array.length) {
+//            if (this.array[currentIndex] % 2 == 0) {
+//                hasNext = true;
+//                break;
+//            } else {
+//                currentIndex++;
+//            }
+        if (index < array.length) {
+            for (int i = index; i < array.length; i++) {
+                if (array[i] % 2 == 0) {
+                    hasNext = true;
+                    break;
+                }
             }
         }
+
         return hasNext;
     }
 
