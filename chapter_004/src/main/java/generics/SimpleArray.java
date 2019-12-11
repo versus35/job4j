@@ -34,13 +34,14 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public int remove(int index) {
+        if (index > position) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         if (index < position) {
             for (int i = 0; i < position; i++) {
                 this.array[i] = this.array[i + 1];
             }
             this.array[position--] = null;
-        } else {
-            throw new ArrayIndexOutOfBoundsException();
         }
         return index;
     }
