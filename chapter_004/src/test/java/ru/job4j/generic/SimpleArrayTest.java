@@ -1,4 +1,4 @@
-package generics;
+package ru.job4j.generics;
 
 import org.junit.Test;
 
@@ -60,7 +60,7 @@ public class SimpleArrayTest {
         testArray.add(3);
         testArray.remove(1);
         int result = testArray.get(1);
-        assertThat(result, is(3));
+        assertThat(result, is(2));
     }
 
 
