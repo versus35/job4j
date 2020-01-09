@@ -77,7 +77,7 @@ public class SimpleArray<T> implements Iterable<T> {
 //                this.array[i] = this.array[i + 1];
 //            }
 //            this.array[position--] = null;
-            System.arraycopy(array, position + 1, array, position, array.length - position -1);
+            System.arraycopy(array, position + 1, array, position, array.length - position - 1);
         }
        // return index;
    // }
