@@ -36,7 +36,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void checkIndexPosition(int position) {
-        if (array.length < position) {
+        if (size < position) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
