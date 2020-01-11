@@ -25,7 +25,7 @@ public class Container<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private int position = 0;
+            private Node<E> count = first;
             private int expectedMod = modCount;
 
             /**
@@ -45,7 +45,7 @@ public class Container<E> implements Iterable<E> {
             @Override
             public boolean hasNext() {
                 checkModCount();
-                return position < size;
+                return (count != null);
             }
 
             /**
@@ -54,12 +54,15 @@ public class Container<E> implements Iterable<E> {
              */
             @Override
             public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return get(position++);
+                checkModCount();
+                E result = first.data;
+                first = first.next;
+                return result;
             }
         };
+    }
+    public int  getSize() {
+        return this.size;
     }
 
     private static class Node<E> {
@@ -87,6 +90,16 @@ public class Container<E> implements Iterable<E> {
         this.modCount++;
     }
 
+   public E delete() {
+       E deleted = null;
+       if (size > 0) {
+           deleted = this.first.data;
+           this.first = this.first.next;
+           this.size--;
+       }
+       return deleted;
+    }
+
     /**
      * Метод возвращает элемент по индексу.
      * @param index возвращаемого элемента.
@@ -99,6 +112,5 @@ public class Container<E> implements Iterable<E> {
         }
         return result.data;
     }
-
 
 }

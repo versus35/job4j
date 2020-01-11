@@ -16,36 +16,40 @@ import static org.junit.Assert.*;
 
 public class ContainerTest {
 
-    private Container<String> cont = new Container<>();
-    private String first = "1";
-    private String second = "2";
-    private String third = "3";
+    private Container<Integer> list;
 
     @Before
     public void fillList() {
-        cont.add(first);
-        cont.add(second);
-        cont.add(third);
+        list = new Container<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
     }
 
     @Test
     public void whenAdd() {
-        assertThat(cont.get(2), is(third));
+        assertThat(list.get(2), is(3));
+    }
+
+    @Test
+    public void whenDelete() {
+        assertThat(list.delete(), is(1));
+        assertThat(list.getSize(), is(2));
     }
 
     @Test
     public void whenIteratorTest() {
-        Iterator<String> iterator = cont.iterator();
+        Iterator<Integer> iterator = list.iterator();
         assertTrue(iterator.hasNext());
-        assertThat(iterator.next(), is(first));
+        assertThat(iterator.next(), is(1));
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void whenCheckMod() {
-        cont.add("1");
-        Iterator<String> it = cont.iterator();
+        list.add(1);
+        Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), Is.is(true));
-        cont.add("2");
+        list.add(2);
         it.hasNext();
     }
 
