@@ -3,7 +3,7 @@
  *
  * @author Bulankin Viktor.
  * @version $Id$.
- * @since 10.01.2020.
+ * @since 12.01.2020.
  */
 
 package ru.job4j.list;
