@@ -10,7 +10,11 @@ package ru.job4j.list;
 import java.util.LinkedList;
 
 public class SimpleListStack<T> {
-    private final LinkedList<T> list = new LinkedList<>();
+    private SimpleArrayList<T> list;
+
+    public SimpleListStack() {
+        this.list = new SimpleArrayList<>();
+    }
 
     /**
      * Метод вставки элемента.
@@ -18,7 +22,7 @@ public class SimpleListStack<T> {
      * @param data добавляемый объект.
      */
     public void push(T data) {
-        list.addFirst(data);
+        list.add(data);
     }
 
     /**
@@ -27,36 +31,36 @@ public class SimpleListStack<T> {
      * @return удаляемый элемент.
      */
     public T poll() {
-        return list.removeFirst();
+        return list.delete();
     }
 
-    private static class Node<T> {
-        private T data;
-        private Node<T> next;
-        private Node<T> first;
-
-        public Node(T data) {
-            this.data = data;
-        }
-
-        /**
-         * Метод для push операции.
-         * @param data добавляемый элемент.
-         */
-        public void addFirst(T data) {
-            Node<T> newFirst = new Node<>(data);
-            newFirst.next = first;
-            first = newFirst;
-        }
-
-        /**
-         * Метод для poll операции.
-         * @return удаляемый элемент.
-         */
-        public T removeFirst() {
-            Node<T> oldFirst = first;
-            first = first.next;
-            return oldFirst.data;
-        }
-    }
+//    private static class Node<T> {
+//        private T data;
+//        private Node<T> next;
+//        private Node<T> first;
+//
+//        public Node(T data) {
+//            this.data = data;
+//        }
+//
+//        /**
+//         * Метод для push операции.
+//         * @param data добавляемый элемент.
+//         */
+//        public void addFirst(T data) {
+//            Node<T> newFirst = new Node<>(data);
+//            newFirst.next = first;
+//            first = newFirst;
+//        }
+//
+//        /**
+//         * Метод для poll операции.
+//         * @return удаляемый элемент.
+//         */
+//        public T removeFirst() {
+//            Node<T> oldFirst = first;
+//            first = first.next;
+//            return oldFirst.data;
+//        }
+//    }
 }
