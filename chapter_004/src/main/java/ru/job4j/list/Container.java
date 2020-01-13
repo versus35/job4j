@@ -54,6 +54,9 @@ public class Container<E> implements Iterable<E> {
              */
             @Override
             public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 checkModCount();
                 E result = first.data;
                 first = first.next;
