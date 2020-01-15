@@ -22,6 +22,10 @@ public class SimpleArrayList<E> {
         this.size++;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     /**
      * Реализовать метод удаления первого элемент в списке.
      *

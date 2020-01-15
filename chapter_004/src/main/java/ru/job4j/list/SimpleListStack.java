@@ -10,6 +10,7 @@ package ru.job4j.list;
 import java.util.LinkedList;
 
 public class SimpleListStack<T> {
+    public boolean isEmpty;
     private SimpleArrayList<T> list;
 
     public SimpleListStack() {
@@ -33,6 +34,11 @@ public class SimpleListStack<T> {
     public T poll() {
         return list.delete();
     }
+
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
 
 //    private static class Node<T> {
 //        private T data;

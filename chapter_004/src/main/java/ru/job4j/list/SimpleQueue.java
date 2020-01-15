@@ -1,20 +1,14 @@
 package ru.job4j.list;
 
-public class SimpleQueue<T>{
+public class SimpleQueue<T> {
 
-    private SimpleListStack<T> first;
-    private SimpleListStack<T> second;
+    private SimpleListStack<T> first = new SimpleListStack<>();
+    private SimpleListStack<T> second = new SimpleListStack<>();
 
-    public SimpleQueue() {
-        this.first = new SimpleListStack<>();
-        this.second = new SimpleListStack<>();
-    }
 
     public boolean isEmpty() {
-        if (second.isEmpty && first.isEmpty) {
-            return true;
-        }
-        return false;
+        return (second.isEmpty && first.isEmpty) ? true : false;
+
     }
 
     public void push(T data) {
@@ -22,10 +16,9 @@ public class SimpleQueue<T>{
     }
 
     public T poll() {
-        if (second.isEmpty()) {
-            while (!first.isEmpty()) {
-                second.push(first.poll());
-            }
+        // if (second.isEmpty()) {
+        while (!first.isEmpty()) {
+            second.push(first.poll());
         }
         return second.poll();
     }
