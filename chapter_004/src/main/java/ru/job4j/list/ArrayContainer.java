@@ -70,7 +70,7 @@ public class ArrayContainer<E> implements Iterable<E> {
     public E remove(int index) {
         modCount++;
         E oldValue = (E) array[index];
-        int numMoved = size - index -1;
+        int numMoved = size - index - 1;
         if (numMoved > 0) {
             System.arraycopy(array, index + 1, array, index, numMoved);
         }
