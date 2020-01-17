@@ -63,6 +63,22 @@ public class ArrayContainer<E> implements Iterable<E> {
     }
 
     /**
+     * Метод удаляет  элемент из хранилища.
+     * @param index элемента.
+     * @return хранилище.
+     */
+    public E remove(int index) {
+        modCount++;
+        E oldValue = (E) array[index];
+        int numMoved = size - index -1;
+        if (numMoved > 0) {
+            System.arraycopy(array, index + 1, array, index, numMoved);
+        }
+        array[--size] = null;
+        return oldValue;
+    }
+
+    /**
      * Метод получает элемент по индексу.
      * @param index объекта.
      * @return объект под заданным индексом.
