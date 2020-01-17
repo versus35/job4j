@@ -25,4 +25,14 @@ public class SimpleQueueTest {
         assertThat(queue.poll(), is("3"));
     }
 
+    @Test
+    public void whenFalse() {
+        queue.push("1");
+        queue.push("2");
+        queue.poll();
+        queue.push("3");
+        assertThat(queue.poll(), is("2"));
+        assertThat(queue.poll(), is("3"));
+    }
+
 }
