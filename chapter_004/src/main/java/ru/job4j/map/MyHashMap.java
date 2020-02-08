@@ -50,7 +50,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
     }
 
     /**
-     * Вычисляет хэш модуль ключа, в зависимости от размера таблицы.
+     * Вычисляет хэш модуль ключа, в зависимости от размеров таблицы.
      *
      * @param key заданный модуль ключа.
      * @return модуль ключа.
@@ -62,7 +62,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
     }
 
     /**
-     * Метод определения индекс в таблице.
+     * Метод определяет индекс в таблице.
      *
      * @param hash   хэ модуль ключа.
      * @param length размер таблицы.
@@ -115,7 +115,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
     }
 
     /**
-     * Метод проверяет содержит ли ключ в таблице.
+     * Метод проверяет содержится ли ключ в таблице.
      *
      * @param key ключ.
      * @return значение ключа, если содержится в таблице.
@@ -253,10 +253,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "key=" + key +
-                    ", values=" + values +
-                    '}';
+            return "Node{" + "key=" + key + ", values=" + values + '}';
         }
     }
 
