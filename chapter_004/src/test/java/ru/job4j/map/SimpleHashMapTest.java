@@ -7,7 +7,6 @@ package ru.job4j.map;
  * @since 08.02.2020.
  */
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -16,12 +15,12 @@ import java.util.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class MyHashMapTest {
-    MyHashMap<String, String> map;
+public class SimpleHashMapTest {
+    SimpleHashMap<String, String> map;
 
     @Before
     public void setupMyMap() {
-        map = new MyHashMap<>();
+        map = new SimpleHashMap<>();
         for (int i = 0; i < 100; i++) {
             map.insert(Integer.toString(i), "User" + i);
         }

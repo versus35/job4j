@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class MyHashMap<K, V> implements Iterable<K> {
+public class SimpleHashMap<K, V> implements Iterable<K> {
 
     private Node<K, V>[] hashTable;
     private int size = 0;
@@ -24,9 +24,8 @@ public class MyHashMap<K, V> implements Iterable<K> {
     /**
      * Инициализация хранилища размером 16.
      */
-    public MyHashMap() {
+    public SimpleHashMap() {
         this.hashTable = new Node[DEFAULT_INITIAL_CAPACITY];
-        reDouble();
     }
 
     /**
@@ -34,19 +33,12 @@ public class MyHashMap<K, V> implements Iterable<K> {
      *
      * @return заданный размер.
      */
-    public MyHashMap(int size) {
+    public SimpleHashMap(int size) {
         this.hashTable = new Node[size];
     }
 
     public int capacity() {
         return hashTable.length;
-    }
-
-    /**
-     * Вычисление размеров таблицы.
-     */
-    private void reDouble() {
-        threshold = (int) ((double) hashTable.length * LOAD_FACTOR);
     }
 
     /**
@@ -122,7 +114,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
      */
     public V get(K key) {
         Node<K, V> elements = this.hashTable[indexFor(hash(key), this.hashTable.length)];
-        return (elements == null ? null : elements.getValues());
+        return (elements == null ? null : elements.values);
 
     }
 
@@ -148,6 +140,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
 
     /**
      * Итератор для обхода хранилища.
+     *
      * @return итератор.
      */
 
@@ -183,7 +176,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
                 for (; position < hashTable.length; position++) {
                     if (hashTable[position] != null) {
                         current++;
-                        key = hashTable[position].getKey();
+                        key = hashTable[position].key;
                         break;
                     }
                 }
@@ -203,6 +196,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
 
     /**
      * Класс описывает описывает объекты, добавленные в таблицу.
+     *
      * @param <K> ключ.
      * @param <V> значение.
      */
@@ -214,42 +208,6 @@ public class MyHashMap<K, V> implements Iterable<K> {
             this.key = key;
             this.values = value;
         }
-
-        public K getKey() {
-            return key;
-        }
-
-        public void setKey(K key) {
-            this.key = key;
-        }
-
-        public V getValues() {
-            return values;
-        }
-
-        public void setValues(V values) {
-            this.values = values;
-        }
-
-//        @Override
-//        public boolean equals(Object o) {
-//            if (this == o) {
-//                return true;
-//            }
-//            if (o == null || getClass() != o.getClass()) {
-//                return false;
-//            }
-//            Node<?, ?> node = (Node<?, ?>) o;
-//            return Objects.equals(key, node.key) && Objects.equals(values, node.values);
-//        }
-//
-//        @Override
-//        public int hashCode() {
-//            int result = 17;
-//            result = result * 31 + key.hashCode();
-//            result = result * 31 + values.hashCode();
-//            return result;
-//        }
 
         @Override
         public String toString() {
