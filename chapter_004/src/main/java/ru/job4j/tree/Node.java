@@ -38,7 +38,7 @@ public class Node<E extends Comparable<E>> {
     }
 
     /**
-     * Метод возвращает спсок подчиненных элементов.
+     * Метод возвращает список подчиненных элементов.
      *
      * @return элементы списка.
      */
@@ -57,13 +57,12 @@ public class Node<E extends Comparable<E>> {
     }
 
     /**
-     * Метод выполняет сравнение с переданным элементом.
+     * Метод возвращает список элементов.
      *
-     * @param element Переданный элемент.
-     * @return Результат сравнения.
+     * @return Элементы списка.
      */
-    public boolean equals(Object element) {
-        return (element instanceof Node && this.value.equals(((Node<E>) element).value));
+    public E getValue() {
+        return this.value;
     }
 
     /**

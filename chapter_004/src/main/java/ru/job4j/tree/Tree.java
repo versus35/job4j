@@ -76,4 +76,58 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return rsl;
     }
 
+    public boolean isBinary() {
+        boolean isBinary = true;
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            Optional<Node<E>> optional = this.findBy(it.next());
+            if (optional.isPresent() && optional.get().getValues().size() > 2) {
+                isBinary = false;
+                break;
+            }
+        }
+        return isBinary;
+    }
+
+    /**
+     * Итератор для обхода дерева.
+     *
+     * @return Итератор.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        /**
+         * Список элементов текущего уровня и потомков текущего корневого элемента.
+         */
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(root);
+        return new Iterator<E>() {
+            /**
+             * Проверяет наличие следующего элемента.
+             * @return true если есть элемент,
+             *         false если нет элемента.
+             */
+            @Override
+            public boolean hasNext() {
+                return !data.isEmpty();
+            }
+
+            /**
+             * Возвращает следующее значение узла дерева.
+             * @return Значение узла.
+             */
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                } else {
+                    Node<E> el = data.poll();
+                    for (Node<E> child : el.getValues()) {
+                        data.offer(child);
+                    }
+                    return el.getValue();
+                }
+            }
+        };
+    }
 }

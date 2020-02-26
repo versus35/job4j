@@ -9,7 +9,7 @@ import java.util.Optional;
  * @version $Id$.
  * @since 26.02.2020.
  */
-public interface SimpleTree<E extends Comparable<E>> {
+public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
     /**
      * Метод добавляет элемент в список подчиненных элементов.
      *
